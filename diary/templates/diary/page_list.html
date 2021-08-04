@@ -4,23 +4,25 @@
 
   {% for page in pages %}
   <li>
-    <div class="date">
-      <span>
-        {{page.dt_created|date:"d"}}
-      </span>
-      <p>
-        {{page.dt_created|date:"M"}}
-      </p>
-    </div>
-    <h2>
-      {{page.title}}
-    </h2>
-    <div class="score">
-      <p>감정점수</p>
-      <span>
-        {{page.score}}점
-      </span>
-    </div>
+    <a href="/diary/page/{{page.id}}">
+      <div class="date">
+        <span>
+          {{page.dt_created|date:"d"}}
+        </span>
+        <p>
+          {{page.dt_created|date:"M"}}
+        </p>
+      </div>
+      <h2>
+        {{page.title}}
+      </h2>
+      <div class="score">
+        <p>감정점수</p>
+        <span>
+          {{page.score}}점
+        </span>
+      </div>
+    </a>
   </li>
   {% endfor %}
 
