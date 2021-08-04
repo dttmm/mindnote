@@ -4,7 +4,7 @@
 
   {% for page in pages %}
   <li>
-    <a href="/diary/page/{{page.id}}">
+    <a href={% url 'page-detail' page.id %}>
       <div class="date">
         <span>
           {{page.dt_created|date:"d"}}
