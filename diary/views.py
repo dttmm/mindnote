@@ -16,3 +16,7 @@ def page_detail(request, page_id):
     page = Page.objects.get(id=page_id)
     context["object"] = page
     return render(request, 'diary/page_detail.html', context)
+
+
+def info(request):
+    return render(request, 'diary/info.html')

@@ -1,29 +1,32 @@
-<h2>일기 목록 페이지</h2>
+{% extends './base.html' %}
+{% load static %}
 
-<ul>
-
-  {% for page in pages %}
-  <li>
-    <a href={% url 'page-detail' page.id %}>
-      <div class="date">
-        <span>
-          {{page.dt_created|date:"d"}}
-        </span>
-        <p>
-          {{page.dt_created|date:"M"}}
-        </p>
-      </div>
-      <h2>
-        {{page.title}}
-      </h2>
-      <div class="score">
-        <p>감정점수</p>
-        <span>
-          {{page.score}}점
-        </span>
-      </div>
-    </a>
-  </li>
-  {% endfor %}
-
-</ul>
+{% block content %}
+<div class="wrap-note">
+  <div class="note">
+    <div class="note-list">
+      <ul>
+        {% for page in pages %}
+        <li>
+          <a href={% url 'page-detail' page.id %}>
+            <div class="date">
+              <span>
+                {{page.dt_created|date:"d"}}
+              </span>
+              <p>
+                {{page.dt_created|date:"M"}}
+              </p>
+            </div>
+            <h2>{{page.title}}</h2>
+            <div class="score">
+              <p>감정점수</p>
+              <span>{{page.score}}점</span>
+            </div>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock content %}
