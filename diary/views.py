@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Page
 from .forms import PageForm
 
@@ -24,7 +24,18 @@ def info(request):
 
 
 def page_create(request):
-    form = PageForm()
-    context = dict()
-    context["form"] = form
-    return render(request, 'diary/page_form.html', context)
+    if request.method == 'POST':
+        new_page = Page(
+            title=request.POST['title'],
+            content=request.POST['content'],
+            feelings=request.POST['feeling'],
+            score=request.POST['score'],
+            dt_created=request.POST['dt_created']
+        )
+        new_page.save()
+        return redirect('page-detail', page_id=new_page.id)
+    else:
+        form = PageForm()
+        context = dict()
+        context["form"] = form
+        return render(request, 'diary/page_form.html', context)
