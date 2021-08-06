@@ -9,5 +9,6 @@ urlpatterns = [
     path('diary/page/<int:page_id>/', views.page_detail, name='page-detail'),
     path('diary/page/<int:page_id>/edit/',
          views.page_update, name='page-update'),
-    # path('diary/page/<int:page_id>/delete/', views.page_delete,name='page-delete'),
+    path('diary/page/<int:page_id>/delete/',
+         views.page_delete, name='page-delete'),
 ]
