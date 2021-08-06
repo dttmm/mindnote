@@ -1,15 +1,19 @@
 from django.shortcuts import render, redirect
 from .models import Page
 from .forms import PageForm
+from django.core.paginator import Paginator
 
 # Create your views here.
 
 
 def page_list(request):
-    context = dict()
     pages = Page.objects.all()
-    context["pages"] = pages
-    return render(request, 'diary/page_list.html', context)
+    paginator = Paginator(pages, 8)
+    cur_page_num = request.GET.get('page')
+    if cur_page_num == None:
+        cur_page_num = 1
+    page = paginator.page(cur_page_num)
+    return render(request, 'diary/page_list.html', {"page": page})
 
 
 def page_detail(request, page_id):
