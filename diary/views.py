@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
+from django.views.generic import CreateView
+from django.urls import reverse
 from .models import Page
 from .forms import PageForm
-from django.core.paginator import Paginator
+
 
 # Create your views here.
 
@@ -27,18 +30,13 @@ def info(request):
     return render(request, 'diary/info.html')
 
 
-def page_create(request):
-    if request.method == 'POST':
-        page_form = PageForm(request.POST)
-        if page_form.is_valid():
-            new_page = page_form.save()
-            return redirect('page-detail', page_id=new_page.id)
+class PageCreateView(CreateView):
+    model = Page
+    form_class = PageForm
+    template_name = 'diary/page_form.html'
 
-    else:
-        page_form = PageForm()
-    context = dict()
-    context["form"] = page_form
-    return render(request, 'diary/page_form.html', context)
+    def get_success_url(self):
+        return reverse('page-detail', kwargs={'page_id': self.object.id})
 
 
 def page_update(request, page_id):
