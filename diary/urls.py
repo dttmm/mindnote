@@ -11,5 +11,5 @@ urlpatterns = [
     path('diary/page/<int:page_id>/edit/',
          views.PageUpdateView.as_view(), name='page-update'),
     path('diary/page/<int:page_id>/delete/',
-         views.page_delete, name='page-delete'),
+         views.PageDeleteView.as_view(), name='page-delete'),
 ]
